@@ -95,7 +95,12 @@
 
 % define the section format 
 \RequirePackage{sectsty}
-\sectionfont{\sectionrule{1ex}{0pt}{-1ex}{0.5pt}}
+\sectionfont{\sectionrule{1ex}{0pt}{-1ex}{0.3pt}}
+
+% define the item/enum sep
+\RequirePackage{enumitem}
+\setenumerate[1]{itemsep=0pt,partopsep=0pt,parsep=\parskip,topsep=5pt}
+\setitemize[1]{itemsep=0pt,partopsep=0pt,parsep=\parskip,topsep=5pt}
 
 
 % all ch font 
@@ -137,6 +142,7 @@
 \else
   \newcommand{\citshape}{\itshape}
 \fi
+
 \ifcsname kaishu\endcsname
   \newcommand{\cnormal}{\kaishu}
 \else
@@ -149,12 +155,25 @@
   \newcommand{\tfont}{\normalfont}
 \fi
 
+
+\ifcsname chtitle\endcsname
+  \newcommand{\subifont}{\chtitle}
+\else
+  \newcommand{\subifont}{\slshape}
+\fi
+
 \ifcsname fangsong\endcsname
   \newcommand{\cfs}{\fangsong}
 \else
   \newcommand{\cfs}{\normalfont}
 \fi
 
+
+\ifcsname kaishu\endcsname
+  \newcommand{\notefont}{\kaishu}
+\else
+  \newcommand{\notefont}{\itshape}
+\fi
 
 \AtBeginDocument{
   \setlength{\abovedisplayskip}{3pt}
@@ -213,7 +232,7 @@
 \newpage
 \null
 \begin{center}%
-  {\Huge\bfseries\tfont \@author \par} 
+  {\Huge\tfont\bfseries \@author \par} 
   \vskip 1em%
   \IfEmpty\phonenum
   \faMobile*\the\phonenum\fi
@@ -229,6 +248,7 @@
 
 
 % some functions 
-\newcommand{\resumesec}[1]{\section*{#1}}
-\newcommand{\timeitem}[2]{{\par {\large\tfont\bfseries #1} \hfill {\large\tfont\bfseries #2} \par}}
-\newcommand{\subtimeitem}[2]{{\par {\tfont #1} \hfill {\tfont #2} \par}}
+\newcommand{\resumesec}[1]{\section*{\Large #1}}
+\newcommand{\timeitem}[2]{{\par {\large\subifont\bfseries #1} \hfill {\large\subifont\bfseries #2} \par}}
+\newcommand{\subtimeitem}[2]{{\par {\subifont #1} \hfill {\subifont #2} \par}}
+\newcommand{\noteitem}[1]{{\small\notefont{#1}}}
